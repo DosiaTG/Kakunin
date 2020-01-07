@@ -83,7 +83,7 @@ class Page {
     return this.getElement(elementName).isPresent();
   }
 
-  public getNumberOfElements(elementName: string) {
+  public getNumberOfElements(elementName: any) {
     return this.getElements(elementName).count();
   }
 
@@ -115,29 +115,35 @@ class Page {
     return waitForInvisibilityOf(this.getElement(elementName));
   }
 
-  public getElement(elementName: string) {
+  public getElement(elementName: any) {
     if (!this[elementName]) {
-      console.warn(
-        chalk.grey(
-          `Element "${elementName}" does not exist in the currentPage. CSS selector will be build from the string!`
-        )
-      );
-      return element(by.css(elementName));
+      if (elementName instanceof protractor.ElementFinder === true) {
+        return elementName;
+      } else {
+        console.warn(
+          chalk.grey(
+            `Element "${elementName}" does not exist in the currentPage. CSS selector will be build from the string!`
+          )
+        );
+        return element(by.css(elementName));
+      }
     }
-
     return this[elementName];
   }
 
-  public getElements(elementName: string) {
+  public getElements(elementName: any) {
     if (!this[elementName]) {
-      console.warn(
-        chalk.grey(
-          `Element "${elementName}" does not exist in the currentPage. CSS selector will be build from the string!`
-        )
-      );
-      return element.all(by.css(elementName));
+      if (elementName instanceof protractor.ElementArrayFinder === true) {
+        return elementName;
+      } else {
+        console.warn(
+          chalk.grey(
+            `Element "${elementName}" does not exist in the currentPage. CSS selector will be build from the string!`
+          )
+        );
+        return element.all(by.css(elementName));
+      }
     }
-
     return this[elementName];
   }
 }

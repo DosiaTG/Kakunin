@@ -4,7 +4,7 @@ import BasePage from './../pages/base';
 
 const timeout = parseInt(config.elementsVisibilityTimeout) * 1000;
 
-export const click = (currentPage: BasePage, elementName: string) => {
+export const click = (currentPage: BasePage, elementName: any) => {
   return currentPage
     .scrollIntoElement(elementName)
     .catch(() => Promise.resolve())

@@ -16,3 +16,10 @@ Feature: Verify displayed pge
         Given I visit the "main" page
         When I click the "googleLink" element
         Then the "google" page is displayed
+
+    Scenario: Verify Simple Button disappear page
+        Given I visit the "main" page
+        When I click the ".emptyPageForClickStep" element
+        And I click the button
+        Then I wait for "5" seconds
+        And the button is not visible
