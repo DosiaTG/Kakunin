@@ -117,9 +117,10 @@ class Page {
 
   public getElement(elementName: string | ElementFinder) {
     if (!this[String(elementName)]) {
-      if (elementName instanceof protractor.ElementFinder === true) {
+      if (elementName instanceof protractor.ElementFinder) {
         return elementName;
-      } else {
+      }
+      {
         console.warn(
           chalk.grey(
             `Element "${elementName}" does not exist in the currentPage. CSS selector will be build from the string!`
@@ -133,9 +134,10 @@ class Page {
 
   public getElements(elementName: string | ElementArrayFinder) {
     if (!this[String(elementName)]) {
-      if (elementName instanceof protractor.ElementArrayFinder === true) {
+      if (elementName instanceof protractor.ElementArrayFinder) {
         return elementName;
-      } else {
+      }
+      {
         console.warn(
           chalk.grey(
             `Element "${elementName}" does not exist in the currentPage. CSS selector will be build from the string!`

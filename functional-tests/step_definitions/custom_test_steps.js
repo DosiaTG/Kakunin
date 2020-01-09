@@ -1,26 +1,25 @@
-const methods_interactions = require('kakunin').methods.interactions;
-const methods_checkers = require('kakunin').methods.checkers;
+const webMethods = require('kakunin')
 
 const { When, Then } = require('kakunin');
 
-When(/^I click the button$/, function() {
-    const elementName = element(by.xpath('//button[@id="button"]'));
-    return methods_interactions.click(this.currentPage, elementName);
+When(/^I click the CLICK ME button in simple button disappear page$/, function() {
+    const elem = element(by.xpath('//button[@id="button"]'));
+    return webMethods.methods.interactions.click(this.currentPage, elem);
 });
 
 Then(/^there are "([^"]*)" elements$/, function(numberExpression) {
-    const elementName = $$('table tr');
-    return methods_checkers.checkNumberOfElements(this.currentPage, numberExpression, elementName);
+    const elem = $$('table tr');
+    return webMethods.methods.checkers.checkNumberOfElements(this.currentPage, numberExpression, elem);
 });
 
 Then(/^the button is not visible$/, function() {
-    const elementName = element(by.xpath('//button[@id="button"]'));
+    const elem = element(by.xpath('//button[@id="button"]'));
     return this.currentPage
-        .isVisible(elementName)
+        .isVisible(elem)
         .then(isVisible => Promise.reject(isVisible))
         .catch(isVisible => {
             if (isVisible === true) {
-                return Promise.reject(`Element '${elementName}' should not be visible.`);
+                return Promise.reject(`Element '${elem}' should not be visible.`);
             }
 
             return Promise.resolve();

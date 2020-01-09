@@ -20,6 +20,6 @@ Feature: Verify displayed pge
     Scenario: Verify Simple Button disappear page
         Given I visit the "main" page
         When I click the ".emptyPageForClickStep" element
-        And I click the button
+        And I click the CLICK ME button in simple button disappear page
         Then I wait for "5" seconds
         And the button is not visible
